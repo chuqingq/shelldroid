@@ -24,6 +24,7 @@ class NewActivity
   lazy val textPhoneModel = findView(TR.textPhoneModel)
   lazy val textPhoneBrand = findView(TR.textPhoneBrand)
   lazy val textImei = findView(TR.textImei)
+  lazy val textAndroidId = findView(TR.textAndroidId)
 
   lazy val  spinner = findView(TR.spinner)
 
@@ -58,6 +59,7 @@ class NewActivity
           appInfo.pkgName,
           active=false,
           textImei,
+          androidId = textAndroidId,
           buildModel= textPhoneModel,
           buildManufacturer = textPhoneBrand,
           buildBrand=textPhoneBrand)

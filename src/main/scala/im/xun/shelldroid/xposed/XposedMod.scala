@@ -113,7 +113,19 @@ class XposedMod extends IXposedHookLoadPackage with IXposedHookZygoteInit {
     findAndHookMethod("android.telephony.TelephonyManager", classLoader, "getDeviceId", new XC_MethodHook() {
       protected override def afterHookedMethod(param: XC_MethodHook.MethodHookParam) {
         d(s"Fake deviceid ${env.deviceId} for $pkgName")
-        param.setResult(env.deviceId)
+        if(env.deviceId.nonEmpty) {
+          param.setResult(env.deviceId)
+        }
+      }
+    })
+
+    //androidid
+    findAndHookMethod("android.provider.Settings.Secure", classLoader, "getString", classOf[android.content.ContentResolver], classOf[String], new XC_MethodHook() {
+      protected override def afterHookedMethod(param: XC_MethodHook.MethodHookParam) {
+        d(s"Fake androiid ${env.androidId} for $pkgName")
+        if(env.androidId.nonEmpty) {
+          param.setResult(env.androidId)
+        }
       }
     })
 
