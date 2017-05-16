@@ -4,6 +4,7 @@
 * virtual env name 作为数字，自增；并作为IMEI和ANDROID_ID变化的部分
 * 去掉phone model和phone brand
 * 去掉IMEI和ANDROID_ID，virtual env name作为变化的部分，不变的部分使用真实的参数
+* 也可以这样：4个参数都自动填上真实的参数，如果需要修改，可以人工修改后面2~3位
 
 #### 展示env列表
 * 需要先确定：能否通过python uiautomator来方便的启动某个env：d(resourceId='im.xun.shelldroid:id/rv').scroll.to(text='wx2') 能找到，返回True
