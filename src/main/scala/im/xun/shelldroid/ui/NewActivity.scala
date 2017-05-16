@@ -1,8 +1,12 @@
 package im.xun.shelldroid
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.telephony.TelephonyManager
+import android.os.Build
+import android.provider.Settings.Secure
 import android.view.{ViewParent, View}
 import android.view.View.OnClickListener
 import android.widget.AdapterView.OnItemSelectedListener
@@ -50,6 +54,19 @@ class NewActivity
     val spAdapter = new SpinnerAdapter
     spinner.setAdapter(spAdapter)
 
+    // chuqq set default parameters
+    val model = Build.MODEL
+    textPhoneModel.setText(model)
+
+    val brand = Build.BRAND
+    textPhoneBrand.setText(brand)
+
+    val deviceId = this.getSystemService(Context.TELEPHONY_SERVICE).asInstanceOf[TelephonyManager].getDeviceId()
+    textImei.setText(deviceId)
+
+    val androidId = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID)
+    textAndroidId.setText(androidId)
+
     btn.setOnClickListener(new OnClickListener {
       override def onClick(v: View): Unit = {
         val appInfo = spinner.getSelectedItem.asInstanceOf[AppInfo]
@@ -70,3 +87,4 @@ class NewActivity
 
   }
 }
+
