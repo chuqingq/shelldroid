@@ -29,6 +29,7 @@ class NewActivity
   lazy val textPhoneBrand = findView(TR.textPhoneBrand)
   lazy val textImei = findView(TR.textImei)
   lazy val textAndroidId = findView(TR.textAndroidId)
+  lazy val textBuildSerial = findView(TR.textBuildSerial)
 
   lazy val  spinner = findView(TR.spinner)
 
@@ -67,6 +68,9 @@ class NewActivity
     val androidId = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID)
     textAndroidId.setText(androidId)
 
+    val buildSerial = Build.SERIAL
+    textBuildSerial.setText(buildSerial)
+
     btn.setOnClickListener(new OnClickListener {
       override def onClick(v: View): Unit = {
         val appInfo = spinner.getSelectedItem.asInstanceOf[AppInfo]
@@ -79,7 +83,8 @@ class NewActivity
           androidId = textAndroidId,
           buildModel= textPhoneModel,
           buildManufacturer = textPhoneBrand,
-          buildBrand=textPhoneBrand)
+          buildBrand=textPhoneBrand,
+          buildSerial = textBuildSerial)
         save(env)
         quit()
       }
